@@ -38,7 +38,11 @@ clean_changes(){
 }
 
 sync(){
-    clean_changes abc ${board}-optee-${version}
+    if [ "$wv" = true ]; then
+        clean_changes abc ${board}-optee-${version}-widevine
+    else
+        clean_changes abc ${board}-optee-${version}
+    fi
     clean_changes android-patchsets swg-mods-${version}
     clean_changes device/linaro/hikey fip.bin
 
