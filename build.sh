@@ -27,6 +27,16 @@ function build(){
     source build/envsetup.sh
     lunch ${board}-${variant}
 
+    if [ "$MMMA" = true ]; then
+	    echo "Start to build ${DIR1}:" >>logs/time.log
+	    date +%Y%m%d-%H%M >>logs/time.log
+	    echo "(time LANG=C mmma ${DIR1}) 2>&1 |tee logs/build-${board}.log"
+	    (time LANG=C mmma ${DIR1}) 2>&1 |tee logs/build-${board}.log
+	    echo "Build done!"
+	    date +%Y%m%d-%H%M >>logs/time.log
+	    exit
+    fi
+
     echo "Start to build:" >>logs/time.log
     date +%Y%m%d-%H%M >>logs/time.log
     echo "(time LANG=C make ${TARGETS[@]} -j${CPUS} ${SHOW_COMMANDS}) 2>&1 |tee logs/build-${board}.log"
@@ -102,6 +112,10 @@ while [ "$1" != "" ]; do
 			shift
 			echo "Num threads: $1"
 			CPUS=$1
+			;;
+		-mmma)	shift
+			MMMA=true
+			DIR1=$1
 			;;
 		-squashfs)
 			echo "Use squashfs for system img"
