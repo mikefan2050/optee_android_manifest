@@ -15,8 +15,8 @@ sync_init_without_depth(){
 }
 
 sync(){
-    echo "repo sync -j${CPUS} ${TARGETS[@]}"
-    repo sync -j${CPUS} ${TARGETS[@]}
+    echo "repo sync -c --no-tags -j${CPUS} ${TARGETS[@]}"
+    repo sync -c --no-tags -j${CPUS} ${TARGETS[@]}
 }
 
 ##########################################################
