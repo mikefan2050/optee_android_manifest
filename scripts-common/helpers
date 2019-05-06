@@ -18,7 +18,7 @@ function get_config(){
 	else
 		echo "Get android-build-configs (abc)"
 		#git clone https://android-git.linaro.org/git/android-build-configs.git abc
-    git clone https://github.com/mikefan2050/android-build-config.git
+    git clone https://github.com/mikefan2050/android-build-config.git abc
 	fi
 }
 
